@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizz Kahoot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .option-btn:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <div id="quiz">
+        <div id="question" class="question">Titre de la question</div>
+        <div id="options" class="options">
+            <button class="option-btn" onclick="checkAnswer(0)">Option 1</button>
+            <button class="option-btn" onclick="checkAnswer(1)">Option 2</button>
+            <button class="option-btn" onclick="checkAnswer(2)">Option 3</button>
+            <button class="option-btn" onclick="checkAnswer(3)">Option 4</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            question: "Quelle est la capitale de la France?",
+            options: ["Paris", "Berlin", "Londres", "Madrid"],
+            correctAnswer: 0
+        },
+    ];
+
+    let currentQuestion = 0;
+
+    function loadQuestion() {
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+
+        questionElement.textContent = quizData[currentQuestion].question;
+        optionsElement.innerHTML = "";
+
+        quizData[currentQuestion].options.forEach((option, index) => {
+            const button = document.createElement("button");
+            button.classList.add("option-btn");
+            button.textContent = option;
+            button.onclick = () => checkAnswer(index);
+            optionsElement.appendChild(button);
+        });
+    }
+
+    function checkAnswer(selectedIndex) {
+        if (selectedIndex === quizData[currentQuestion].correctAnswer) {
+            alert("Bonne réponse !");
+        } else {
+            alert("Mauvaise réponse. La bonne réponse est : " + quizData[currentQuestion].options[quizData[currentQuestion].correctAnswer]);
+        }
+
+        currentQuestion++;
+
+        if (currentQuestion < quizData.length) {
+            loadQuestion();
+        } else {
+            alert("Quiz terminé !");
+        }
+    }
+    loadQuestion();
+</script>
+
+</body>
+</html>
