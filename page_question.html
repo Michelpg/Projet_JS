@@ -44,10 +44,6 @@
     <div id="quiz">
         <div id="question" class="question">Titre de la question</div>
         <div id="options" class="options">
-            <button class="option-btn" onclick="checkAnswer(0)">Option 1</button>
-            <button class="option-btn" onclick="checkAnswer(1)">Option 2</button>
-            <button class="option-btn" onclick="checkAnswer(2)">Option 3</button>
-            <button class="option-btn" onclick="checkAnswer(3)">Option 4</button>
         </div>
     </div>
 </div>
@@ -56,8 +52,6 @@
     const quizData = [
         {
             question: "Quelle est la capitale de la France?",
-            options: ["Paris", "Berlin", "Londres", "Madrid"],
-            correctAnswer: 0
         },
     ];
 
@@ -70,32 +64,15 @@
         questionElement.textContent = quizData[currentQuestion].question;
         optionsElement.innerHTML = "";
 
-        quizData[currentQuestion].options.forEach((option, index) => {
-            const button = document.createElement("button");
-            button.classList.add("option-btn");
-            button.textContent = option;
-            button.onclick = () => checkAnswer(index);
-            optionsElement.appendChild(button);
-        });
     }
 
-    function checkAnswer(selectedIndex) {
-        if (selectedIndex === quizData[currentQuestion].correctAnswer) {
-            alert("Bonne réponse !");
-        } else {
-            alert("Mauvaise réponse. La bonne réponse est : " + quizData[currentQuestion].options[quizData[currentQuestion].correctAnswer]);
-        }
-
-        currentQuestion++;
-
-        if (currentQuestion < quizData.length) {
-            loadQuestion();
-        } else {
-            alert("Quiz terminé !");
-        }
-    }
     loadQuestion();
 </script>
+<label for="userInput">Entrez votre réponse :</label>
+    <input type="text" id="userInput">
+    <button onclick="comparerReponse()">Comparer</button>
+
+    <script src="reponse.js"></script>
 
 </body>
 </html>
