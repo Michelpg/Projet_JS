@@ -5,3 +5,8 @@ function commencerJeu() {
   function redirigerVersPageConnexion() {
     window.location.href = "page_connexion.html"; 
   }
+
+  function redirigerVersPageInscription() {
+    window.location.href = "inscription.html";
+  }
+  

@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const app = express();
 const cors = require("cors");
 const PORT = 3000;
-const addService = require("./service.service");
-const { getPerson, getAll, deletePerson } = require("./person.service");
+
+
 
 app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
 
