@@ -24,6 +24,6 @@ function checkAnswer() {
         loadQuestion();
     } else {
         alert("Quiz terminé !");
-        window.location.href = "index.html";
+        window.location.href = "page_accueil.html";
     }
 }
