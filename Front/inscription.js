@@ -8,7 +8,7 @@ const addInscription = () => {
   console.log(JSON.stringify(inscription));
 
   axios
-    .post("http://localhost:3000/inscription/add", inscription)
+    .post("http://10.4.254.164:3000/inscription/add", inscription)
     .then((res) => {
       console.log(res.data);
     })
