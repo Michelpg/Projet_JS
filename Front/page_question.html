@@ -78,13 +78,44 @@
         .score-info {
             font-size: 28px;
         }
+        /* Style pour le bouton de menu */
+        #menu-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 2px solid white;
+            transition: background-color 0.3s ease;
+        }
+        #menu-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
     </style>
 </head>
 <body>
+    <!-- Conteneur du quiz -->
     <div class="container" id="quiz-container"></div>
+    
+    <!-- Affichage du score -->
     <div class="score" id="score">Score : 0</div>
+    
+    <!-- Bouton de menu -->
+    <button id="menu-button">Menu</button>
 
+    <!-- Script JavaScript -->
     <script>
+                function goToIndexPage() {
+            window.location.href = "index.html"; // Redirection vers index.html
+        }
+
+        // Ajout d'un gestionnaire d'événements pour le bouton de menu
+        document.getElementById("menu-button").addEventListener("click", goToIndexPage);
         let currentQuestionIndex = 0;
         let quizData = null;
         let score = 0;
