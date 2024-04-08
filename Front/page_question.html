@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Kapitalisme</title>
     <style>
         body {
@@ -109,7 +108,7 @@
 
     <!-- Script JavaScript -->
     <script>
-                function goToIndexPage() {
+        function goToIndexPage() {
             window.location.href = "index.html"; // Redirection vers index.html
         }
 
@@ -143,9 +142,8 @@
 
             const questionDiv = document.createElement('div');
             questionDiv.classList.add('question');
-            questionDiv.innerHTML = `
-                <p>${question.question}</p>
-            `;
+            // Escape special characters to ensure they are displayed correctly
+            questionDiv.innerHTML = `<p>${decodeHTMLEntities(question.question)}</p>`;
             container.innerHTML = ''; // Clear previous question
             container.appendChild(questionDiv);
 
@@ -159,7 +157,8 @@
             allAnswers.forEach(answer => {
                 const answerButton = document.createElement('button');
                 answerButton.classList.add('btn', 'btn-answer');
-                answerButton.textContent = answer;
+                // Escape special characters to ensure they are displayed correctly
+                answerButton.textContent = decodeHTMLEntities(answer);
                 answerButton.addEventListener('click', () => checkAnswer(answer, question.correct_answer));
                 answersDiv.appendChild(answerButton);
             });
@@ -212,6 +211,13 @@
 
         // Fetch quiz data when the page loads
         fetchQuizData();
+
+        // Function to decode HTML entities
+        function decodeHTMLEntities(text) {
+            const textarea = document.createElement('textarea');
+            textarea.innerHTML = text;
+            return textarea.value;
+        }
     </script>
 </body>
 </html>
