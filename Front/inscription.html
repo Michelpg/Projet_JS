@@ -6,8 +6,18 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="inscription.js"></script>
   <title>Inscription</title>
+  <link rel="stylesheet" href="page.css">
 </head>
 <body>
+
+  <button onclick="redirigerVersIndex()">Menu</button>
+  
+  <script> 
+  function redirigerVersIndex() {
+    window.location.href = "index.html"; 
+  }
+  </script>
+
   <h1>Inscription</h1>
   <form id="inscriptionForm">
     <label for="nom_utilisateur">Nom d'utilisateur :</label>
@@ -22,5 +32,6 @@
 
     <button type="button" onclick="addInscription()">S'inscrire</button>
   </form>
+  <script src="page.js"></script>
 </body>
 </html>
