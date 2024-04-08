@@ -11,7 +11,9 @@ function getPerson() {
     axios.post("http://10.4.254.164:3000/connexion/person", { mail, mdp }) 
         .then(response => {
             console.log(response.data);
-            alert("Connexion réussie !");
+            // Si la connexion réussit, créer un cookie
+            createCookie("loggedInUser", JSON.stringify({ mail, mdp }));
+            // Rediriger vers la page index2.html
             redirigerVersIndex2();
         })
         .catch(error => {
@@ -22,4 +24,15 @@ function getPerson() {
 
 function redirigerVersIndex2() {
     window.location.href = "index2.html"; 
+}
+
+// Fonction pour créer un cookie
+function createCookie(name, value) {
+    // Définir la date d'expiration du cookie (ici, dans 1 heure)
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + (1 * 60 * 60 * 1000));
+    // Formatage de la date d'expiration pour le cookie
+    const expires = "expires=" + expirationDate.toUTCString();
+    // Définition du cookie avec le nom, la valeur et la date d'expiration
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }

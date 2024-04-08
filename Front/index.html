@@ -14,9 +14,6 @@
     <h1 class="title">Kapitalisme</h1>
     <p class="description">Testez vos connaissances sur les capitales du monde !</p>
     <button onclick="commencerJeu()">Commencer</button>
-    <button onclick="redirigerVersPageConnexion()">Connexion</button> <!-- Bouton Connexion -->
-    <button onclick="redirigerVersPageInscription()">S'inscrire</button>
-
   </div>
 
   <div class="world-map">
@@ -35,8 +32,27 @@
     </div>
   </div>
 
-  
   <script src="page.js"></script>
+  <script>
+    // Vérifier la présence du cookie de connexion automatique
+    const loggedIn = document.cookie.includes("loggedIn=true");
+
+    // Si l'utilisateur n'est pas connecté automatiquement, afficher les boutons de connexion et d'inscription
+    if (!loggedIn) {
+      const signupButton = document.createElement('button');
+      signupButton.textContent = "S'inscrire";
+      signupButton.addEventListener('click', redirigerVersPageInscription);
+      document.querySelector('.top-bar').appendChild(signupButton);
+
+      // Ajout d'un espace entre les boutons
+      document.querySelector('.top-bar').appendChild(document.createTextNode(' '));
+
+      const loginButton = document.createElement('button');
+      loginButton.textContent = 'Connexion';
+      loginButton.addEventListener('click', redirigerVersPageConnexion);
+      document.querySelector('.top-bar').appendChild(loginButton);
+    }
+  </script>
 </body>
 
 </html>
