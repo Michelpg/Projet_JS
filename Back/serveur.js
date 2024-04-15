@@ -9,6 +9,9 @@ const addInscription = require("./inscription.inscription");
 
 const getPerson = require("./connexion.connexion");
 
+const creerQuiz = require("./creation_quiz");
+
+
 app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
 
 app.use(bodyParser.json());
@@ -28,27 +31,21 @@ app.post("/inscription/add", (req, res) => {
     });
 });
 
-/*
-app.post("/connexion/person", (req, res) => {
-  const { mail, mdp } = req.body;
-  console.log({ mail, mdp  });
-  // Utiliser la fonction getPerson pour récupérer le mot de passe correspondant à l'e-mail fourni
-  getPerson(mail)
-    .then((user) => {
-      // Vérifier si les mots de passe correspondent
-      if (user.mdp === mdp) {
-        res.status(200).json({ message: "Connexion réussie !" });
-      } else {
-        res.status(401).json({ error: "Mot de passe incorrect." });
-      }
+
+app.post("/create_quiz/add", (req, res) => {
+  const { question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3 } = req.body;
+  console.log({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3 });
+
+  creerQuiz({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3 })
+    .then((affectedRows) => {
+      res.status(200).json({ message: "Quiz créé avec succès !"  });
     })
     .catch((error) => {
-      // Gérer les erreurs lors de la récupération de l'utilisateur ou si aucun utilisateur n'est trouvé avec cet e-mail
-      console.error(error);
-      res.status(404).json({ error: "Aucun utilisateur trouvé avec cet e-mail." });
+      console.error("Erreur lors de la création du quiz :", error);
+      res.status(500).json({ error : "Erreur lors de la création du quiz." });
     });
 });
-*/
+
 
 app.post("/connexion/person", (req, res) => {
   const { mail, mdp } = req.body;
