@@ -8,7 +8,7 @@ function getPerson() {
     console.log(JSON.stringify(mdp));
 
     // Effectuer une requête POST vers le serveur pour vérifier les informations de connexion
-    axios.post("Server=tcp:dbserver-quiz.database.windows.net,1433;Initial Catalog=db_quiz;Persist Security Info=False;User ID=admin_login_AzureSQL;Password=7+[4r?L7Z9K;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;", { mail, mdp }) 
+    axios.post("Server=tcp:dbserver-quiz.database.windows.net,1433;Initial Catalog=db_quiz;Persist Security Info=False;User ID=admin_login_AzureSQL;Password=7+[4r?L7Z9K"/";MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;", { mail, mdp }) 
         .then(response => {
             console.log(response.data);
             // Si la connexion réussit, créer un cookie
