@@ -8,7 +8,7 @@ function getPerson() {
     console.log(JSON.stringify(mdp));
 
     // Effectuer une requête POST vers le serveur pour vérifier les informations de connexion
-    axios.post("http://10.4.254.164:3000/connexion/person", { mail, mdp }) 
+    axios.post("http://10.4.255.119:3000/connexion/person", { mail, mdp }) 
         .then(response => {
             console.log(response.data);
             // Si la connexion réussit, créer un cookie
@@ -36,3 +36,6 @@ function createCookie(name, value) {
     // Définition du cookie avec le nom, la valeur et la date d'expiration
     document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
+
+
+
