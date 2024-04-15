@@ -1,7 +1,7 @@
 const getPerson = (mail) => {
     const pool = require("./connexionBDD");
     return new Promise((resolve, reject) => {
-        const sql = "SELECT nom_utilisateur, mdp FROM utilisateur WHERE mail = ?"; // Modifier la requête SQL pour rechercher par e-mail
+        const sql = "SELECT id_utilisateur ,nom_utilisateur, mdp FROM utilisateur WHERE mail = ?"; // Modifier la requête SQL pour rechercher par e-mail
         pool.query(sql, [mail], function (err, results) {
             if (err) {
                 console.error("Erreur lors de la récupération de l'utilisateur :", err);
@@ -16,6 +16,7 @@ const getPerson = (mail) => {
         });
     });
 };
+
 
 module.exports = getPerson;
 
