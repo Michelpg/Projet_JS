@@ -33,11 +33,19 @@
   </div>
 
   <script src="page.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
   <script>
     // Vérifier la présence du cookie de connexion automatique
-    const loggedIn = document.cookie.includes("loggedIn=true");
+    const loggedIn = Cookies.get('loggedInUser');
 
     // Si l'utilisateur n'est pas connecté automatiquement, afficher les boutons de connexion et d'inscription
+    if (!loggedIn) {
+      const disconnect = document.createElement('button');
+      disconnect.textContent = "Deconnexion";
+      disconnect.addEventListener('click', Cookies.remove('loggedInUser'));
+      document.querySelector('.top-bar').appendChild(disconnect);
+    }
+    ;
     if (!loggedIn) {
       const signupButton = document.createElement('button');
       signupButton.textContent = "S'inscrire";

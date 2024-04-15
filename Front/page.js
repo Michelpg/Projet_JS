@@ -10,8 +10,10 @@ function commencerJeu() {
     window.location.href = "inscription.html";
   }
   
-  function redirigerVersIndex2() {
+  function redirigerVersIndex() {
     window.location.href = "index.html"; 
   }
 
-
+  function redirigerVersPageConnexion2() {
+    window.location.href = "connexion.js"; 
+  }
