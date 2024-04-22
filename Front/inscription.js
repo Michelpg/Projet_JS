@@ -8,7 +8,7 @@ const addInscription = () => {
   console.log(JSON.stringify(inscription));
 
   axios
-    .post("http://10.4.255.119:3000/inscription/add", inscription)
+    .post("dbserver-quiz.database.windows.net/inscription/add", inscription)
     .then((res) => {
       console.log(res.data);
     })
