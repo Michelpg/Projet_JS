@@ -10,21 +10,6 @@
 <body>
     <h1>Créer un Quiz</h1>
     <form id="quizForm">
-        <label for="question">Question :</label>
-        <input type="text" id="question" name="question" required><br>
-        
-        <label for="reponse_correcte">Réponse Correcte :</label>
-        <input type="text" id="reponse_correcte" name="reponse_correcte" required><br>
-        
-        <label for="reponse_fausse1">Réponse Fausse 1 :</label>
-        <input type="text" id="reponse_fausse1" name="reponse_fausse1" required><br>
-
-        <label for="reponse_fausse2">Réponse Fausse 2 :</label>
-        <input type="text" id="reponse_fausse2" name="reponse_fausse2" required><br>
-
-        <label for="reponse_fausse3">Réponse Fausse 3 :</label>
-        <input type="text" id="reponse_fausse3" name="reponse_fausse3" required><br>
-
         <label for="difficulte">Difficulté :</label>
         <select id="difficulte" name="difficulte">
             <option value="facile">Facile</option>
@@ -37,8 +22,11 @@
 
         <input type="hidden" id="id_utilisateur" name="id_utilisateur">
 
+        <div id="questionsContainer">
+            <!-- Les questions et réponses seront ajoutées ici dynamiquement -->
+        </div>
 
-
+        <button type="button" onclick="addQuestion()">Ajouter une question</button><br>
         <button type="button" onclick="creerQuiz()">Créer Quiz</button>
     </form>
 

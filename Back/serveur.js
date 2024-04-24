@@ -75,8 +75,8 @@ app.post("/inscription/add", (req, res) => {
 app.post("/create_quiz/add", (req, res) => {
   const quizData = req.body;
 
-  // Créez le quiz en utilisant la fonction 'creerQuiz' et transmettez l'ID de l'utilisateur
-  creerQuiz(quizData)
+  // Créez le quiz en utilisant la fonction 'creerQuiz' et transmettez l'ID de l'utilisateur et les questions
+  creerQuiz(quizData.id_utilisateur, quizData.difficulte, quizData.theme, quizData.questions)
     .then((affectedRows) => {
       res.status(200).json({ message: "Quiz créé avec succès !" });
     })
@@ -85,32 +85,6 @@ app.post("/create_quiz/add", (req, res) => {
       res.status(500).json({ error: "Erreur lors de la création du quiz." });
     });
 });
-
-
-/*
-app.post("/create_quiz/add", (req, res) => {
-  const { question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme, id_utilisateur } = req.body;
-
-  // Vérifiez si l'id_utilisateur est valide
-  if (!id_utilisateur) {
-    return res.status(400).json({ error: "L'id_utilisateur est manquant." });
-  }
-
-  // Créez le quiz en utilisant la fonction 'creerQuiz' et transmettez l'ID de l'utilisateur
-  creerQuiz({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme }, id_utilisateur)
-    .then((affectedRows) => {
-      res.status(200).json({ message: "Quiz créé avec succès !" });
-    })
-    .catch((error) => {
-      console.error("Erreur lors de la création du quiz :", error);
-      res.status(500).json({ error: "Erreur lors de la création du quiz." });
-    });
-});
-
-*/
-
-
-
 
 
 app.listen(PORT, function (err) {
