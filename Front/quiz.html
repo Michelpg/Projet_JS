@@ -97,8 +97,19 @@
       console.log("Thème sélectionné :", selectTheme, "Code :", themeCode);
 
       // Rediriger vers la page du quiz avec les paramètres sélectionnés
-      window.location.href = "quiz.html?difficulty=" + selectDifficulty + "&theme=" + themeCode;
+      window.location.href = "page_question.html?difficulty=" + selectDifficulty + "&theme=" + themeCode;
     }
+    function commencerQuizCommunaute() {
+      const selectDifficulty = document.getElementById('selectDifficulty').value;
+      const selectTheme = document.getElementById('selectTheme').value;
+      const themeCode = themes[selectTheme]; // Récupérer le code associé au thème
+
+      console.log("Difficulté sélectionnée :", selectDifficulty);
+      console.log("Thème sélectionné :", selectTheme, "Code :", themeCode);
+
+      // Rediriger vers la page du quiz avec les paramètres sélectionnés
+      window.location.href = "page_question_communaute.html?difficulty=" + selectDifficulty + "&theme=" + themeCode;
+  }
 
     // Vérifier la présence du cookie de connexion automatique
     const loggedIn = Cookies.get('loggedInUser');

@@ -24,7 +24,4 @@ function commencerJeu() {
     window.location.href = "quiz.html"; 
   }
 
-  function commencerQuizCommunaute() {
-    window.location.href = "community_quiz.html";
-  }
 
