@@ -6,6 +6,7 @@ const pool = mysql.createPool({
   user: "admin_login_AzureSQL", // Utilisateur de BD
   password: '7+[4r?L7Z9K"',
   database: "db_quiz", // Nom de la BD
+  port: 1433,
 });
 
 pool.getConnection((err, connection) => {
