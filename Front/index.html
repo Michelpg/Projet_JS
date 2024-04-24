@@ -42,7 +42,10 @@
     if (loggedIn) {
       const disconnect = document.createElement('button');
       disconnect.textContent = "Deconnexion";
-      disconnect.addEventListener('click', Cookies.remove('loggedInUser'));
+      disconnect.addEventListener('click', function() {
+    Cookies.remove('loggedInUser');
+    redirigerVersIndex(); // Redirect after removing the cookie
+  });
       document.querySelector('.top-bar').appendChild(disconnect);
     }
     ;
