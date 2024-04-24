@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kapitalisme</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="page.css">
+</head>
+
+<body>
+    <button onclick="redirigerVersIndex()">Menu</button>
+  
+    <script> 
+    function redirigerVersIndex() {
+      window.location.href = "index.html"; 
+    }
+    </script>
+
+  <div class="top-bar">
+    <h1 class="title">Kapitalisme</h1>
+    <p class="description">Testez vos connaissances sur les capitales du monde !</p>
+    <button onclick="commencerJeu()">Quiz aléatoire</button>
+  </div>
+
+  <div class="world-map">
+    <!-- Contenu de la carte du monde -->
+  </div>
+
+
+  <script src="page.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+  <div >
+  <script>
+    // Vérifier la présence du cookie de connexion automatique
+    const loggedIn = Cookies.get('loggedInUser');
+
+    // Si l'utilisateur n'est pas connecté automatiquement, afficher les boutons de connexion et d'inscription
+    if (loggedIn) {
+      const createButton = document.createElement('button');
+      createButton.textContent = "Créer un quiz";
+      createButton.addEventListener('click', redirigerVersPageCreation);
+      document.querySelector('.top-bar').appendChild(createButton);
+    }
+    
+    // Créer la liste déroulante lorsque l'utilisateur clique sur le bouton "Quiz de la communauté"
+    const quizCommuButton = document.createElement('button');
+    quizCommuButton.textContent = "Quiz de la communauté";
+    quizCommuButton.addEventListener('click', afficherListeQuiz);
+    document.querySelector('.top-bar').appendChild(quizCommuButton);
+
+    function afficherListeQuiz() {
+      // Créer une div pour contenir les listes déroulantes et le bouton de validation
+      const container = document.createElement('div');
+      container.classList.add('instructions');
+
+      // Créer les listes déroulantes
+      for (let i = 0; i < 3; i++) {
+        const select = document.createElement('select');
+
+        // Ajouter des options à chaque liste déroulante
+        const options = ['Option 1', 'Option 2', 'Option 3'];
+        options.forEach(option => {
+          const opt = document.createElement('option');
+          opt.value = option;
+          opt.textContent = option;
+          select.appendChild(opt);
+        });
+
+        // Ajouter la liste déroulante à la div de container
+        container.appendChild(select);
+      }
+
+      // Créer un bouton de validation
+      const button = document.createElement('button');
+      button.textContent = 'Valider';
+      button.addEventListener('click', validerSelection);
+
+      // Ajouter le bouton à la div de container
+      container.appendChild(button);
+
+      // Ajouter la div de container à la page
+      document.body.appendChild(container);
+    }
+
+    function validerSelection() {
+      // Récupérer toutes les listes déroulantes
+      const selects = document.querySelectorAll('select');
+
+      // Parcourir chaque liste déroulante et récupérer la valeur sélectionnée
+      selects.forEach((select, index) => {
+        const selectedOption = select.options[select.selectedIndex].value;
+        console.log(`Liste déroulante ${index + 1} : ${selectedOption}`);
+      });
+
+      // Vous pouvez effectuer d'autres actions avec les valeurs sélectionnées ici
+    }
+  </script>
+  </div>
+</body>
+
+</html>

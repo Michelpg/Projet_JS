@@ -17,3 +17,10 @@ function commencerJeu() {
   function redirigerVersPageConnexion2() {
     window.location.href = "connexion.js"; 
   }
+  function redirigerVersPageCreation() {
+    window.location.href = "create_quiz.html"; 
+  }
+
+  function redirigerVersPageQuiz() {
+    window.location.href = "quiz.html"; 
+  }
