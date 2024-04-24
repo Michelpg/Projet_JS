@@ -35,7 +35,7 @@
     <button onclick="commencerQuiz()">Quiz</button>
     <button onclick="commencerQuizCommunaute()">Quiz de la communauté</button>
   </div>
-
+  <script src="page.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
   <script>
     const themes = {
@@ -70,23 +70,15 @@
 
     // Si l'utilisateur n'est pas connecté automatiquement, afficher les boutons de connexion et d'inscription
     if (loggedIn) {
+      console.log("ok")
       const createButton = document.createElement('button');
       createButton.textContent = "Créer un quiz";
-      createButton.addEventListener('click', redirigerVersPageCreation);
+      createButton.addEventListener('click', function() {
+        redirigerVersPageCreation(); // Redirect after removing the cookie
+  });
       document.querySelector('.top-bar').appendChild(createButton);
+      
     }
-
-    const quizAPI = document.createElement('button');
-    quizAPI.textContent = "Quiz aléatoire";
-    quizAPI.addEventListener('click', commencerJeu);
-    document.querySelector('.top-bar').appendChild(quizAPI);
-
-    document.querySelector('.top-bar').appendChild(document.createTextNode(' '));
-
-    const quizCommuButton = document.createElement('button');
-    quizCommuButton.textContent = "Quiz de la communauté";
-    quizCommuButton.addEventListener('click', redirigerVersPageQuiz);
-    document.querySelector('.top-bar').appendChild(quizCommuButton);
   </script>
 </body>
 
