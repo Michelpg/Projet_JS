@@ -117,10 +117,19 @@
         let quizData = null;
         let score = 0;
 
+        const queryString = window.location.search;
+
+        // Créer un nouvel objet URLSearchParams à partir de la chaîne de requête
+        const params = new URLSearchParams(queryString);
+
+        // Récupérer les valeurs des paramètres difficulty et theme
+        const difficulty = params.get('difficulty');
+        const theme = params.get('theme');
+
         // Function to fetch quiz data from API
         async function fetchQuizData() {
             try {
-                const response = await fetch('https://opentdb.com/api.php?amount=2');
+                const response = await fetch('https://opentdb.com/api.php?amount=50&category='+theme+'&difficulty='+difficulty);
                 const data = await response.json();
                 quizData = data;
                 renderQuestion();
