@@ -14,6 +14,10 @@ const getPerson = require("./connexion.connexion");
 
 const creerQuiz = require("./creation_quiz");
 
+
+const getCommunityQuiz = require("./community_quiz");
+
+
 //app.use(cors());
 app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
 
@@ -85,6 +89,19 @@ app.post("/create_quiz/add", (req, res) => {
       res.status(500).json({ error: "Erreur lors de la création du quiz." });
     });
 });
+
+
+app.get("/community_quiz", (req, res) => {
+  getCommunityQuiz()
+    .then((quizzes) => {
+      res.status(200).json(quizzes);
+    })
+    .catch((error) => {
+      console.error("Erreur lors de la récupération des quiz de la communauté :", error);
+      res.status(500).json({ error: "Erreur lors de la récupération des quiz de la communauté." });
+    });
+});
+
 
 
 app.listen(PORT, function (err) {
