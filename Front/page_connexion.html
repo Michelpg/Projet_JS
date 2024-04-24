@@ -51,7 +51,6 @@
 
                 const id_utilisateur = response.data.id_utilisateur;
                 Cookies.set("id_utilisateur", id_utilisateur, { expires: 7 });
-                console.log(JSON.stringify(id_utilisateur));
 
                 redirigerVersIndex();
             })
