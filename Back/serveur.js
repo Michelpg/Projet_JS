@@ -5,6 +5,8 @@ const cors = require("cors");
 const PORT = 3000;
 
 
+
+
 const addInscription = require("./inscription.inscription");
 
 const getPerson = require("./connexion.connexion");
@@ -37,6 +39,11 @@ app.post("/create_quiz/add", (req, res) => {
   const { question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme, id_utilisateur } = req.body;
   console.log({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme, id_utilisateur });
 
+  // Vérifiez si l'id_utilisateur est valide
+  if (!id_utilisateur) {
+    return res.status(400).json({ error: "L'id_utilisateur est manquant." });
+  }
+
   creerQuiz({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme }, id_utilisateur)
     .then((affectedRows) => {
       res.status(200).json({ message: "Quiz créé avec succès !" });
@@ -46,9 +53,6 @@ app.post("/create_quiz/add", (req, res) => {
       res.status(500).json({ error: "Erreur lors de la création du quiz." });
     });
 });
-
-
-
 
 
 app.post("/connexion/person", (req, res) => {
@@ -65,6 +69,15 @@ app.post("/connexion/person", (req, res) => {
 
         // Renvoyer les informations de l'utilisateur connecté en réponse
         res.status(200).json({ message: "Connexion réussie !", user });
+
+        const id_utilisateur = user.id_utilisateur;
+        console.log(id_utilisateur);
+        Cookies.set("id_utilisateur", id_utilisateur, { expires: 7 });
+        
+
+        res.status(200).json({ message: "id !", id_utilisateur });
+
+
       } else {
         console.log("Mot de passe incorrect.");
         res.status(401).json({ error: "Mot de passe incorrect." });

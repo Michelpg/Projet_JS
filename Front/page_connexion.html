@@ -49,10 +49,8 @@
                 // Si la connexion réussit, créer un cookie
                 Cookies.set("loggedInUser", true, { expires: 7 });
 
-                const id_utilisateur = response.data.id_utilisateur;
-                Cookies.set("id_utilisateur", id_utilisateur, { expires: 7 });
 
-                redirigerVersIndex();
+                //redirigerVersIndex();
             })
             .catch(error => {
                 console.error(error);
