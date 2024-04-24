@@ -39,7 +39,7 @@
     const loggedIn = Cookies.get('loggedInUser');
 
     // Si l'utilisateur n'est pas connecté automatiquement, afficher les boutons de connexion et d'inscription
-    if (!loggedIn) {
+    if (loggedIn) {
       const disconnect = document.createElement('button');
       disconnect.textContent = "Deconnexion";
       disconnect.addEventListener('click', Cookies.remove('loggedInUser'));
