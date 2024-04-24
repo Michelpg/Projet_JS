@@ -1,5 +1,4 @@
 function commencerJeu() {
-    //alert("Le jeu va commencer !");
     window.location.href = "page_question.html";
   }
   function redirigerVersPageConnexion() {
@@ -23,4 +22,8 @@ function commencerJeu() {
 
   function redirigerVersPageQuiz() {
     window.location.href = "quiz.html"; 
+  }
+
+  function commencerQuizCommunaute() {
+    window.location.href = "community_quiz.html";
   }
