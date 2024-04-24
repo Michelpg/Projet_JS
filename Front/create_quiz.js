@@ -12,7 +12,7 @@ function creerQuiz() {
     console.log(JSON.stringify(reponse_fausse2));
     console.log(JSON.stringify(reponse_fausse3));
     // Envoi des données au serveur
-    axios.post("http://10.4.255.119:3000/create_quiz/add", {
+    axios.post("http://localhost:3000/create_quiz/add", {
         question,
         reponse_correcte,
         reponse_fausse1,
