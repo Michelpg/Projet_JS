@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const cors = require("cors");
 const PORT = 3000;
+const cookie = require('cookie');
 
 
 
@@ -22,38 +23,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-app.post("/inscription/add", (req, res) => {
-  const { nom, mail, mdp } = req.body;
-  console.log({ nom, mail, mdp });
-  addInscription({ nom, mail, mdp })
-    .then((affectedRows) => {
-      res.status(200).json({ "Affected rows":  affectedRows });
-    })
-    .catch((error) => {
-      res.status(500).json({ "error": "Failed to insert data" });
-    });
-});
-
-
-app.post("/create_quiz/add", (req, res) => {
-  const { question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme, id_utilisateur } = req.body;
-  console.log({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme, id_utilisateur });
-
-  // Vérifiez si l'id_utilisateur est valide
-  if (!id_utilisateur) {
-    return res.status(400).json({ error: "L'id_utilisateur est manquant." });
-  }
-
-  creerQuiz({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme }, id_utilisateur)
-    .then((affectedRows) => {
-      res.status(200).json({ message: "Quiz créé avec succès !" });
-    })
-    .catch((error) => {
-      console.error("Erreur lors de la création du quiz :", error);
-      res.status(500).json({ error: "Erreur lors de la création du quiz." });
-    });
-});
-
 
 app.post("/connexion/person", (req, res) => {
   const { mail, mdp } = req.body;
@@ -68,17 +37,13 @@ app.post("/connexion/person", (req, res) => {
         console.log("Mot de passe correct.");
 
         // Renvoyer les informations de l'utilisateur connecté en réponse
-        res.status(200).json({ message: "Connexion réussie !", user });
-
-        const id_utilisateur = user.id_utilisateur;
+        const { id_utilisateur } = user;
         console.log(id_utilisateur);
-        Cookies.set("id_utilisateur", id_utilisateur, { expires: 7 });
-        
 
-        res.status(200).json({ message: "id !", id_utilisateur });
+       
 
-
-      } else {
+        res.status(200).json({ message: "Connexion réussie !", user, id_utilisateur });
+      } else{
         console.log("Mot de passe incorrect.");
         res.status(401).json({ error: "Mot de passe incorrect." });
       }
@@ -91,6 +56,58 @@ app.post("/connexion/person", (req, res) => {
 });
 
 
+
+
+app.post("/inscription/add", (req, res) => {
+  const { nom, mail, mdp } = req.body;
+  console.log({ nom, mail, mdp });
+  addInscription({ nom, mail, mdp })
+    .then((affectedRows) => {
+      res.status(200).json({ "Affected rows":  affectedRows });
+    })
+    .catch((error) => {
+      res.status(500).json({ "error": "Failed to insert data" });
+    });
+});
+
+
+
+app.post("/create_quiz/add", (req, res) => {
+  const quizData = req.body;
+
+  // Créez le quiz en utilisant la fonction 'creerQuiz' et transmettez l'ID de l'utilisateur
+  creerQuiz(quizData)
+    .then((affectedRows) => {
+      res.status(200).json({ message: "Quiz créé avec succès !" });
+    })
+    .catch((error) => {
+      console.error("Erreur lors de la création du quiz :", error);
+      res.status(500).json({ error: "Erreur lors de la création du quiz." });
+    });
+});
+
+
+/*
+app.post("/create_quiz/add", (req, res) => {
+  const { question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme, id_utilisateur } = req.body;
+
+  // Vérifiez si l'id_utilisateur est valide
+  if (!id_utilisateur) {
+    return res.status(400).json({ error: "L'id_utilisateur est manquant." });
+  }
+
+  // Créez le quiz en utilisant la fonction 'creerQuiz' et transmettez l'ID de l'utilisateur
+  creerQuiz({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme }, id_utilisateur)
+    .then((affectedRows) => {
+      res.status(200).json({ message: "Quiz créé avec succès !" });
+    })
+    .catch((error) => {
+      console.error("Erreur lors de la création du quiz :", error);
+      res.status(500).json({ error: "Erreur lors de la création du quiz." });
+    });
+});
+
+*/
 
 
 

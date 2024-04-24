@@ -6,14 +6,8 @@ function creerQuiz() {
     const reponse_fausse3 = document.getElementById("reponse_fausse3").value;
     const difficulte = document.getElementById("difficulte").value;
     const theme = document.getElementById("theme").value;
-
-    console.log(JSON.stringify(question));
-    console.log(JSON.stringify(reponse_correcte));
-    console.log(JSON.stringify(reponse_fausse1));
-    console.log(JSON.stringify(reponse_fausse2));
-    console.log(JSON.stringify(reponse_fausse3));
-    console.log(JSON.stringify(difficulte));
-    console.log(JSON.stringify(theme));
+    const id_utilisateur = localStorage.getItem('id_utilisateur');
+    document.getElementById('id_utilisateur').value = id_utilisateur;
 
     // Envoi des données au serveur
     axios.post("http://localhost:3000/create_quiz/add", {
@@ -23,7 +17,8 @@ function creerQuiz() {
         reponse_fausse2,
         reponse_fausse3,
         difficulte,
-        theme
+        theme,
+        id_utilisateur
     })
     .then(response => {
         alert(response.data.message); // Affiche un message de succès

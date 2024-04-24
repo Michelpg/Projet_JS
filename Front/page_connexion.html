@@ -38,25 +38,28 @@
 
   <script>
     function getPerson() {
-        // Récupérer les valeurs des champs email et mdp
-        const mail = document.getElementById("mail").value;
-        const mdp = document.getElementById("password").value;
+  // Récupérer les valeurs des champs email et mdp
+  const mail = document.getElementById("mail").value;
+  const mdp = document.getElementById("password").value;
 
-        // Effectuer une requête POST vers le serveur pour vérifier les informations de connexion
-        axios.post("http://localhost:3000/connexion/person", { mail, mdp }) 
-            .then(response => {
-                console.log(response.data);
-                // Si la connexion réussit, créer un cookie
-                Cookies.set("loggedInUser", true, { expires: 7 });
+  // Effectuer une requête POST vers le serveur pour vérifier les informations de connexion
+  axios.post("http://localhost:3000/connexion/person", { mail, mdp })
+    .then(response => {
+      console.log(response.data);
+      // Si la connexion réussit, stocker l'ID de l'utilisateur dans le localStorage
+      localStorage.setItem('id_utilisateur', response.data.id_utilisateur);
 
+      // Créer un cookie
+      Cookies.set("loggedInUser", true, { expires: 7 });
 
-                //redirigerVersIndex();
-            })
-            .catch(error => {
-                console.error(error);
-                alert("Échec de la connexion. Veuillez vérifier vos informations.");
-            });
-    }
+      redirigerVersIndex();
+    })
+    .catch(error => {
+      console.error(error);
+      alert("Échec de la connexion. Veuillez vérifier vos informations.");
+    });
+}
+
   </script>
 </body>
 </html>
