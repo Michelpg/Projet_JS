@@ -15,8 +15,6 @@
   <div class="top-bar">
     <h1 class="title">Kapitalisme</h1>
     <p class="description">Testez vos connaissances sur les capitales du monde !</p>
-    <button onclick="commencerJeu()">Quiz aléatoire</button>
-    <button onclick="redirigerVersPageCreation()">Creation quiz</button>
   </div>
 
   <div class="world-map">
@@ -25,13 +23,11 @@
 
   <div class="instructions">
     <select id="selectDifficulty">
-      <option value="anyDifficulty">Toute difficulté</option>
       <option value="easy">Facile</option>
       <option value="medium">Moyen</option>
       <option value="hard">Difficile</option>
     </select>
     <select id="selectTheme">
-      <option value="anyTheme">Tout thème</option>
       <option value="geography">Géographie</option>
       <option value="history">Histoire</option>
       <option value="science">Science</option>
@@ -43,7 +39,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
   <script>
     const themes = {
-      "anyTheme" : "",
       "geography": 1,
       "history": 2,
       "science": 3
