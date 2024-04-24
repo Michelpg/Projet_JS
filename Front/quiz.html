@@ -11,23 +11,16 @@
 
 <body>
     <button onclick="redirigerVersIndex()">Menu</button>
-  
-    <script> 
-    function redirigerVersIndex() {
-      window.location.href = "index.html"; 
-    }
-    </script>
 
   <div class="top-bar">
     <h1 class="title">Kapitalisme</h1>
     <p class="description">Testez vos connaissances sur les capitales du monde !</p>
-    <button onclick="commencerJeu()">Quiz aléatoire</button>
+
   </div>
 
   <div class="world-map">
     <!-- Contenu de la carte du monde -->
   </div>
-
 
   <script src="page.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
@@ -43,61 +36,57 @@
       createButton.addEventListener('click', redirigerVersPageCreation);
       document.querySelector('.top-bar').appendChild(createButton);
     }
-    
-    // Créer la liste déroulante lorsque l'utilisateur clique sur le bouton "Quiz de la communauté"
+    ;
+    const quizAPI = document.createElement('button');
+    quizAPI.textContent = "Quiz aléatoire";
+    quizAPI.addEventListener('click', commencerJeu);
+    document.querySelector('.top-bar').appendChild(quizAPI);
+
+    document.querySelector('.top-bar').appendChild(document.createTextNode(' '));
+
     const quizCommuButton = document.createElement('button');
     quizCommuButton.textContent = "Quiz de la communauté";
-    quizCommuButton.addEventListener('click', afficherListeQuiz);
+    quizCommuButton.addEventListener('click', redirigerVersPageQuiz);
     document.querySelector('.top-bar').appendChild(quizCommuButton);
+</script>
 
-    function afficherListeQuiz() {
-      // Créer une div pour contenir les listes déroulantes et le bouton de validation
-      const container = document.createElement('div');
-      container.classList.add('instructions');
+  <script src="page.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+  <div class="instructions">
+    <!-- Création des listes déroulantes et du bouton de validation -->
+    <select id="select1">
+      <option value="Option 1">Option 1</option>
+      <option value="Option 2">Option 2</option>
+      <option value="Option 3">Option 3</option>
+    </select>
+    <select id="select2">
+      <option value="Option 1">Option 1</option>
+      <option value="Option 2">Option 2</option>
+      <option value="Option 3">Option 3</option>
+    </select>
+    <select id="select3">
+      <option value="Option 1">Option 1</option>
+      <option value="Option 2">Option 2</option>
+      <option value="Option 3">Option 3</option>
+    </select>
+    <button onclick="validerSelection()">Valider</button>
+  </div>
 
-      // Créer les listes déroulantes
-      for (let i = 0; i < 3; i++) {
-        const select = document.createElement('select');
-
-        // Ajouter des options à chaque liste déroulante
-        const options = ['Option 1', 'Option 2', 'Option 3'];
-        options.forEach(option => {
-          const opt = document.createElement('option');
-          opt.value = option;
-          opt.textContent = option;
-          select.appendChild(opt);
-        });
-
-        // Ajouter la liste déroulante à la div de container
-        container.appendChild(select);
-      }
-
-      // Créer un bouton de validation
-      const button = document.createElement('button');
-      button.textContent = 'Valider';
-      button.addEventListener('click', validerSelection);
-
-      // Ajouter le bouton à la div de container
-      container.appendChild(button);
-
-      // Ajouter la div de container à la page
-      document.body.appendChild(container);
-    }
-
+  <script>
     function validerSelection() {
-      // Récupérer toutes les listes déroulantes
-      const selects = document.querySelectorAll('select');
+      // Récupérer les valeurs sélectionnées dans les listes déroulantes
+      const select1Value = document.getElementById('select1').value;
+      const select2Value = document.getElementById('select2').value;
+      const select3Value = document.getElementById('select3').value;
 
-      // Parcourir chaque liste déroulante et récupérer la valeur sélectionnée
-      selects.forEach((select, index) => {
-        const selectedOption = select.options[select.selectedIndex].value;
-        console.log(`Liste déroulante ${index + 1} : ${selectedOption}`);
-      });
+      // Afficher les valeurs sélectionnées dans la console
+      console.log("Sélection 1 :", select1Value);
+      console.log("Sélection 2 :", select2Value);
+      console.log("Sélection 3 :", select3Value);
 
       // Vous pouvez effectuer d'autres actions avec les valeurs sélectionnées ici
     }
   </script>
-  </div>
 </body>
 
 </html>
