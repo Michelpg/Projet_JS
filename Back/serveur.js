@@ -34,11 +34,10 @@ app.post("/inscription/add", (req, res) => {
 
 
 app.post("/create_quiz/add", (req, res) => {
-  const { question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme } = req.body;
-  const id_utilisateur = req.body.id_utilisateur; // Ajoutez cette ligne pour récupérer l'ID de l'utilisateur
-  console.log({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme });
+  const { question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme, id_utilisateur } = req.body;
+  console.log({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme, id_utilisateur });
 
-  creerQuiz({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme }, id_utilisateur) // Passez l'ID de l'utilisateur à la fonction creerQuiz
+  creerQuiz({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme }, id_utilisateur)
     .then((affectedRows) => {
       res.status(200).json({ message: "Quiz créé avec succès !" });
     })
@@ -47,6 +46,7 @@ app.post("/create_quiz/add", (req, res) => {
       res.status(500).json({ error: "Erreur lors de la création du quiz." });
     });
 });
+
 
 
 
