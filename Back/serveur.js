@@ -11,8 +11,9 @@ const getPerson = require("./connexion.connexion");
 
 const creerQuiz = require("./creation_quiz");
 
-
+//app.use(cors());
 app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
