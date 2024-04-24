@@ -34,18 +34,21 @@ app.post("/inscription/add", (req, res) => {
 
 
 app.post("/create_quiz/add", (req, res) => {
-  const { question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3 } = req.body;
-  console.log({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3 });
+  const { question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme } = req.body;
+  const id_utilisateur = req.body.id_utilisateur; // Ajoutez cette ligne pour récupérer l'ID de l'utilisateur
+  console.log({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme });
 
-  creerQuiz({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3 })
+  creerQuiz({ question, reponse_correcte, reponse_fausse1, reponse_fausse2, reponse_fausse3, difficulte, theme }, id_utilisateur) // Passez l'ID de l'utilisateur à la fonction creerQuiz
     .then((affectedRows) => {
-      res.status(200).json({ message: "Quiz créé avec succès !"  });
+      res.status(200).json({ message: "Quiz créé avec succès !" });
     })
     .catch((error) => {
       console.error("Erreur lors de la création du quiz :", error);
-      res.status(500).json({ error : "Erreur lors de la création du quiz." });
+      res.status(500).json({ error: "Erreur lors de la création du quiz." });
     });
 });
+
+
 
 
 app.post("/connexion/person", (req, res) => {
@@ -73,6 +76,7 @@ app.post("/connexion/person", (req, res) => {
       res.status(404).json({ error: "Aucun utilisateur trouvé avec cet e-mail." });
     });
 });
+
 
 
 

@@ -1,9 +1,9 @@
-const createQuiz = (quizData) => {
+const createQuiz = (quizData, id_utilisateur) => {
   const pool = require("./connexionBDD");
   return new Promise((resolve, reject) => {
       // Insérer d'abord un enregistrement dans la table `quiz` pour obtenir l'ID du quiz
-      const sqlInsertQuiz = "INSERT INTO quiz (id_utilisateur) VALUES (?)";
-      pool.query(sqlInsertQuiz, [quizData.id_utilisateur], function (err, result) {
+      const sqlInsertQuiz = "INSERT INTO quiz (id_utilisateur, difficulte, theme) VALUES (?, ?, ?)";
+      pool.query(sqlInsertQuiz, [id_utilisateur, quizData.difficulte, quizData.theme], function (err, result) {
           if (err) {
               console.error("Erreur lors de la création du quiz :", err);
               reject(err);
@@ -28,6 +28,7 @@ const createQuiz = (quizData) => {
 };
 
 module.exports = createQuiz;
+
 
 
 /*const creerQuiz = (quizData) => {

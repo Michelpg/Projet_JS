@@ -22,6 +22,7 @@
     <h1 class="title">Kapitalisme</h1>
     <p class="description">Testez vos connaissances sur les capitales du monde !</p>
     <button onclick="commencerJeu()">Quiz aléatoire</button>
+    <button onclick="redirigerVersPageCreation()">Creation quiz</button>
   </div>
 
   <div class="world-map">
@@ -42,7 +43,9 @@
       createButton.textContent = "Créer un quiz";
       createButton.addEventListener('click', redirigerVersPageCreation);
       document.querySelector('.top-bar').appendChild(createButton);
-    }
+    };
+
+      
     
     // Créer la liste déroulante lorsque l'utilisateur clique sur le bouton "Quiz de la communauté"
     const quizCommuButton = document.createElement('button');
@@ -102,7 +105,7 @@
   }
 
 
-  
+
     }
   </script>
   </div>
