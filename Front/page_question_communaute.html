@@ -112,7 +112,7 @@
     <script>
 
         // Ajout d'un gestionnaire d'événements pour le bouton de menu
-        document.getElementById("menu-button").addEventListener("click", redirigerVersIndex );
+        //document.getElementById("menu-button").addEventListener("click", redirigerVersIndex );
         let currentQuestionIndex = 0;
         let quizData = null;
         let score = 0;
@@ -219,7 +219,7 @@
             return textarea.value;
         }
         function wait(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
+        return new Promise(resolve => setTimeout(resolve, ms));
         }
     </script>
 </body>
