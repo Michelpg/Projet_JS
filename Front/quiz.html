@@ -10,23 +10,64 @@
 </head>
 
 <body>
-    <button onclick="redirigerVersIndex()">Menu</button>
+  <button onclick="redirigerVersIndex()">Menu</button>
 
   <div class="top-bar">
     <h1 class="title">Kapitalisme</h1>
     <p class="description">Testez vos connaissances sur les capitales du monde !</p>
-    <button onclick="commencerJeu()">Quiz aléatoire</button>
-    <button onclick="redirigerVersPageCreation()">Creation quiz</button>
   </div>
 
   <div class="world-map">
     <!-- Contenu de la carte du monde -->
   </div>
 
-  <script src="page.js"></script>
+  <div class="instructions">
+    <select id="selectDifficulty">
+      <option value="anyDifficulty">Toute difficulté</option>
+      <option value="easy">Facile</option>
+      <option value="medium">Moyen</option>
+      <option value="hard">Difficile</option>
+    </select>
+    <select id="selectTheme">
+      <option value="anyTheme">Tout thème</option>
+      <option value="geography">Géographie</option>
+      <option value="history">Histoire</option>
+      <option value="science">Science</option>
+    </select>
+    <button onclick="commencerQuiz()">Quiz</button>
+    <button onclick="commencerQuizCommunaute()">Quiz de la communauté</button>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
-  <div >
   <script>
+    const themes = {
+      "anyTheme" : "",
+      "geography": 1,
+      "history": 2,
+      "science": 3
+    };
+
+    function commencerQuiz() {
+      const selectDifficulty = document.getElementById('selectDifficulty').value;
+      const selectTheme = document.getElementById('selectTheme').value;
+      const themeCode = themes[selectTheme]; // Récupérer le code associé au thème
+
+      console.log("Difficulté sélectionnée :", selectDifficulty);
+      console.log("Thème sélectionné :", selectTheme, "Code :", themeCode);
+
+      // Rediriger vers la page du quiz avec les paramètres sélectionnés
+      window.location.href = "quiz.html?difficulty=" + selectDifficulty + "&theme=" + themeCode;
+    }
+
+    function commencerQuizCommunaute() {
+      // Rediriger vers la page du quiz de la communauté
+      window.location.href = "community_quiz.html";
+    }
+
+    function redirigerVersIndex() {
+      window.location.href = "index.html";
+    }
+
     // Vérifier la présence du cookie de connexion automatique
     const loggedIn = Cookies.get('loggedInUser');
 
@@ -37,58 +78,18 @@
       createButton.addEventListener('click', redirigerVersPageCreation);
       document.querySelector('.top-bar').appendChild(createButton);
     }
-    
-    // Créer la liste déroulante lorsque l'utilisateur clique sur le bouton "Quiz de la communauté"
+
+    const quizAPI = document.createElement('button');
+    quizAPI.textContent = "Quiz aléatoire";
+    quizAPI.addEventListener('click', commencerJeu);
+    document.querySelector('.top-bar').appendChild(quizAPI);
+
+    document.querySelector('.top-bar').appendChild(document.createTextNode(' '));
+
     const quizCommuButton = document.createElement('button');
     quizCommuButton.textContent = "Quiz de la communauté";
     quizCommuButton.addEventListener('click', redirigerVersPageQuiz);
     document.querySelector('.top-bar').appendChild(quizCommuButton);
-</script>
-
-  <script src="page.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
-  <div class="instructions">
-    <!-- Création des listes déroulantes et du bouton de validation -->
-    <select id="select1">
-      <option value="Option 1">Option 1</option>
-      <option value="Option 2">Option 2</option>
-      <option value="Option 3">Option 3</option>
-    </select>
-    <select id="select2">
-      <option value="Option 1">Option 1</option>
-      <option value="Option 2">Option 2</option>
-      <option value="Option 3">Option 3</option>
-    </select>
-    <select id="select3">
-      <option value="Option 1">Option 1</option>
-      <option value="Option 2">Option 2</option>
-      <option value="Option 3">Option 3</option>
-    </select>
-    <button onclick="validerSelection()">Valider</button>
-  </div>
-
-  <script>
-    function validerSelection() {
-      // Récupérer les valeurs sélectionnées dans les listes déroulantes
-      const select1Value = document.getElementById('select1').value;
-      const select2Value = document.getElementById('select2').value;
-      const select3Value = document.getElementById('select3').value;
-
-      // Afficher les valeurs sélectionnées dans la console
-      console.log("Sélection 1 :", select1Value);
-      console.log("Sélection 2 :", select2Value);
-      console.log("Sélection 3 :", select3Value);
-
-      // Vous pouvez effectuer d'autres actions avec les valeurs sélectionnées ici
-
-
-      function redirigerVersPageCreation() {
-    window.location.href = "create_quiz.html"; 
-  }
-
-
-
-    }
   </script>
 </body>
 
