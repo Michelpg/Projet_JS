@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kapitalisme</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <style>
         body {
             font-family: 'Roboto Condensed', sans-serif;
@@ -129,7 +131,7 @@
         // Function to fetch quiz data from API
         async function fetchQuizData() {
             try {
-                const response = await fetch('https://opentdb.com/api.php?amount=50&category='+theme+'&difficulty='+difficulty);
+                const response = await fetch('https://opentdb.com/api.php?amount=5&category='+theme+'&difficulty='+difficulty);
                 const data = await response.json();
                 quizData = data;
                 renderQuestion();
@@ -137,6 +139,14 @@
                 console.error('Error fetching quiz data:', error);
             }
         }
+        let userId = null;
+
+        // Vérifiez si l'utilisateur est connecté et stockez son ID
+        const storedUserId = localStorage.getItem("id_utilisateur");
+        if (storedUserId) {
+        userId = parseInt(storedUserId);
+        console.log("User ID:", userId);
+}
 
         // Function to render question
         function renderQuestion() {
@@ -186,7 +196,29 @@
                     </div>
                 </div>
             `;
-        }
+        
+          // Vérifiez si l'utilisateur est connecté avant d'envoyer le score au serveur
+             if (userId !== null) {
+                updateBestScore(userId, score);
+                 }
+                }
+
+                function updateBestScore(userId, score) {
+                if (userId !== null) {
+                    axios
+                    .post("http://localhost:3000/update_best_score", {
+                        id_utilisateur: userId,
+                        meilleur_score: score,
+                        current_score: score, // Ajouter le score actuel
+                    })
+                    .then((response) => {
+                        console.log("Best score updated:", response.data);
+                    })
+                    .catch((error) => {
+                        console.error("Error updating best score:", error);
+                    });
+                }
+                }               
 
         // Function to check answer
         function checkAnswer(userAnswer, correctAnswer) {
