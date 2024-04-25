@@ -25,12 +25,24 @@
     
     <label for="mdp">Mot de passe :</label>
     <input type="password" id="mdp" name="mdp" required><br>
-    
 
-    <button type="button" onclick="addInscription()">S'inscrire</button>
+    <button type="button" onclick="verif_champ()">S'inscrire</button>
   </form>
 
 </div>
+<script>
+function verif_champ(){
+  let nom = document.getElementById("nom_utilisateur").value;
+  let mail = document.getElementById("email").value;
+  let mdp = document.getElementById("mdp").value;
+if (!nom || !mail || !mdp) {
+  alert('Veuillez remplir tous les champs.');
+  return; // Sortir de la fonction si un champ est vide
+}
+else
+addInscription
+}
+</script>
   <script src="page.js"></script>
 </body>
 </html>

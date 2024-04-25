@@ -16,6 +16,3 @@ const addInscription = () => {
       console.error(err.message);
     });
 };
-
-
-
