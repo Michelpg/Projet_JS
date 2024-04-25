@@ -102,6 +102,7 @@
 
 </head>
 <body>
+  
   <!-- Conteneur du quiz -->
   <div class="container" id="quiz-container"></div>
 
@@ -112,6 +113,57 @@
   <button id="menu-button">Menu</button>
 
   <script src="community_quiz_page.js"></script>
+  <script>
+    // Récupérer les paramètres de l'URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+  
+    // Mapper les valeurs des paramètres aux valeurs réelles dans la base de données
+    const difficultyMapping = {
+      easy: 'facile',
+      medium: 'moyenne',
+      hard: 'difficile'
+    };
+  
+  const themeMapping = {
+  9: 'general_knowledge',
+  10: 'books',
+  11: 'films',
+  12: 'music',
+  13: 'theatre',
+  14: 'television',
+  15: 'video_games',
+  16: 'board_games',
+  17: 'science&nature',
+  18: 'computers',
+  19: 'mathematics',
+  20: 'mythology',
+  21: 'sports',
+  22: 'geography',
+  23: 'history',
+  24: 'politics',
+  25: 'art',
+  26: 'celebrities',
+  27: 'animals',
+  28: 'vehicles',
+  29: 'comics',
+  30: 'gadgets',
+  31: 'anime&manga',
+  32: 'cartoons&animation'
+};
+
+  
+    const difficulty = difficultyMapping[urlParams.get('difficulty')];
+    const themeCode = urlParams.get('theme');
+    const theme = themeMapping[themeCode];
+  
+    console.log("difficulty:", difficulty);
+    console.log("theme:", theme);
+  
+    // Stocker les paramètres dans des variables globales pour les utiliser dans community_quiz_page.js
+    window.difficulty = difficulty;
+    window.themeCode = theme;
+  </script>
   
 </body>
 </html>

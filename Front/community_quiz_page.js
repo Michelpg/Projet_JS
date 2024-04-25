@@ -13,16 +13,27 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("User ID:", userId);
   }
 
+
+
 // Function to fetch quiz data from the server
 async function fetchQuizData() {
   try {
-    const response = await axios.get("http://localhost:3000/get_random_quiz");
+    const response = await axios.get("http://localhost:3000/get_random_quiz", {
+      params: {
+        difficulty: window.difficulty,
+        theme: window.themeCode
+      }
+    });
     quizData = response.data;
     renderQuestion();
   } catch (error) {
     console.error("Error fetching quiz data:", error);
   }
 }
+
+
+
+
 
 // Function to render question
 function renderQuestion() {

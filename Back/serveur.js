@@ -95,8 +95,11 @@ app.post("/create_quiz/add", (req, res) => {
 const communityQuiz = require("./community_quiz");
 
 app.get("/get_random_quiz", (req, res) => {
+  const difficulty = req.query.difficulty;
+  const themeCode = req.query.theme;
+
   communityQuiz
-    .getRandomQuiz()
+    .getRandomQuiz(difficulty, themeCode)
     .then((quiz) => {
       res.status(200).json(quiz);
     })
@@ -105,6 +108,9 @@ app.get("/get_random_quiz", (req, res) => {
       res.status(500).json({ error: "Erreur lors de la récupération d'un quiz aléatoire." });
     });
 });
+
+
+
 
 app.post("/update_best_score", (req, res) => {
   const { id_utilisateur, meilleur_score, current_score } = req.body;
