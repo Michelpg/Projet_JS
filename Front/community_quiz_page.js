@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// Function to fetch quiz data from the server
 async function fetchQuizData() {
   try {
     const response = await axios.get("http://localhost:3000/get_random_quiz", {
@@ -35,7 +34,6 @@ async function fetchQuizData() {
 
 
 
-// Function to render question
 function renderQuestion() {
   if (!quizData || currentQuestionIndex >= quizData.questions.length) {
     displayEndPage();
@@ -54,7 +52,7 @@ function renderQuestion() {
   const answersDiv = document.createElement("div");
   answersDiv.classList.add("answers");
 
-  // Shuffle answers (correct and incorrect)
+
   const allAnswers = [
     question.reponse_correct,
     question.reponse_fausse1,
@@ -96,7 +94,7 @@ function displayEndPage() {
   }
 }
 
-// Function to update the best score on the server
+
 function updateBestScore(userId, score) {
   if (userId !== null) {
     axios
@@ -116,11 +114,11 @@ function updateBestScore(userId, score) {
 
 
 
-// Function to check answer
+
 function checkAnswer(userAnswer, correctAnswer) {
   const container = document.getElementById("quiz-container");
 
-  // Change button colors
+
   const buttons = document.querySelectorAll(".btn-answer");
   buttons.forEach((button) => {
     if (button.textContent === correctAnswer) {
@@ -128,18 +126,18 @@ function checkAnswer(userAnswer, correctAnswer) {
     } else {
       button.classList.add("incorrect");
     }
-    button.disabled = true; // Disable buttons after answering
+    button.disabled = true; 
   });
 
-  // Increment score if the answer is correct
+
   if (userAnswer === correctAnswer) {
     score++;
     document.getElementById("score").textContent = `Score : ${score}`;
   }
 
-  currentQuestionIndex++; // Move to the next question
+  currentQuestionIndex++; 
   if (currentQuestionIndex < quizData.questions.length) {
-    setTimeout(renderQuestion, 2000); // Render next question after 2 seconds
+    setTimeout(renderQuestion, 2000); 
   } else {
     wait(2000).then(() => {
       displayEndPage();
@@ -147,7 +145,7 @@ function checkAnswer(userAnswer, correctAnswer) {
   }
 }
 
-// Fetch quiz data when the page loads
+
 fetchQuizData();
 
 function wait(ms) {
