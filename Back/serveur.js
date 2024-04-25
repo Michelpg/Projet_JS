@@ -15,8 +15,6 @@ const getPerson = require("./connexion.connexion");
 const creerQuiz = require("./creation_quiz");
 
 
-const getCommunityQuiz = require("./community_quiz");
-
 
 //app.use(cors());
 app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
@@ -91,16 +89,41 @@ app.post("/create_quiz/add", (req, res) => {
 });
 
 
-app.get("/community_quiz", (req, res) => {
-  getCommunityQuiz()
-    .then((quizzes) => {
-      res.status(200).json(quizzes);
+
+
+
+const communityQuiz = require("./community_quiz");
+
+app.get("/get_random_quiz", (req, res) => {
+  communityQuiz
+    .getRandomQuiz()
+    .then((quiz) => {
+      res.status(200).json(quiz);
     })
     .catch((error) => {
-      console.error("Erreur lors de la récupération des quiz de la communauté :", error);
-      res.status(500).json({ error: "Erreur lors de la récupération des quiz de la communauté." });
+      console.error("Erreur lors de la récupération d'un quiz aléatoire :", error);
+      res.status(500).json({ error: "Erreur lors de la récupération d'un quiz aléatoire." });
     });
 });
+
+app.post("/update_best_score", (req, res) => {
+  const { id_utilisateur, meilleur_score, current_score } = req.body;
+
+  communityQuiz
+    .updateBestScore(id_utilisateur, meilleur_score, current_score)
+    .then((result) => {
+      res.status(200).json({ message: "Meilleur score mis à jour ou inchanger" });
+    })
+    .catch((error) => {
+      console.error("Erreur lors de la mise à jour du meilleur score :", error);
+      res.status(500).json({ error: "Erreur lors de la mise à jour du meilleur score" });
+    });
+});
+
+
+
+
+
 
 
 

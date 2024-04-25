@@ -25,6 +25,6 @@ function commencerJeu() {
   }
 
   function commencerQuizCommunaute() {
-    window.location.href = "community_quiz.html";
+    window.location.href = "page_question_communaute.html";
   }
 

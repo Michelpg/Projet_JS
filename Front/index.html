@@ -43,6 +43,7 @@
       const disconnect = document.createElement('button');
       disconnect.textContent = "Deconnexion";
       disconnect.addEventListener('click', function() {
+    localStorage.clear(); // Vider le localStorage lors de la déconnexion
     Cookies.remove('loggedInUser');
     redirigerVersIndex(); // Redirect after removing the cookie
   });
