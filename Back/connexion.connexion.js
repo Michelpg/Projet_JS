@@ -19,31 +19,3 @@ const getPerson = (mail) => {
 
 
 module.exports = getPerson;
-
-
-
-
-
-
-
-
-
-/* Get a person by its id from DB
-const getPerson = (id) => {
-    const pool = require("./db_connexion");
-    return new Promise((resolve, reject) => {
-      const sql = "SELECT mdp FROM utilisateur WHERE nom_utilisateur = ?";
-      pool.query(sql, [id], function (err, results) {
-        if (err) {
-          console.log(err.sqlMessage);
-          return reject(err);
-        }
-        console.log("Found: " + results[0]);
-        resolve(results[0]);
-      });
-    });
-  };
-
-module.exports = getPerson;
-
-*/
